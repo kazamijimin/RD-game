@@ -1,0 +1,105 @@
+:root {
+  font-family: Inter, ui-rounded, "Segoe UI", sans-serif;
+  color: #102a43;
+  background: #f7efdc;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  --font-display-family: Inter, ui-rounded, "Segoe UI", sans-serif;
+  --color-transparent: transparent;
+  --color-surface-page: #f7efdc;
+  --color-surface-frame: #f1e3c3;
+  --color-surface-panel: #fffdf7;
+  --color-surface-notice: #fff0e7;
+  --color-surface-muted: #f4f2ec;
+  --color-text-primary: #102a43;
+  --color-text-secondary: #40566d;
+  --color-text-muted: #5c7084;
+  --color-text-on-action: #ffffff;
+  --color-border-warm: #dfc994;
+  --color-border-soft: #ead9c8;
+  --color-border-strong: #8f6b32;
+  --color-frame-depth: #c9ae70;
+  --color-action-primary: #c94712;
+  --color-action-primary-hover: #b83d0d;
+  --color-action-primary-depth: #892b08;
+  --color-action-secondary: #ffffff;
+  --color-success: #247451;
+  --color-danger: #b42318;
+  --color-focus: #1769d2;
+  --radius-control: 1rem;
+  --radius-notice: 1.25rem;
+  --radius-panel: 1.5rem;
+  --radius-frame: 2rem;
+  --radius-pill: 999px;
+  --shadow-panel-depth: 0 7px 0 var(--color-frame-depth);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 20rem;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.starter-dashboard {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: var(--color-surface-page);
+}
+
+.starter-dashboard section {
+  width: min(100%, 34rem);
+  display: grid;
+  gap: 1rem;
+  padding: 2rem;
+  border: 2px solid var(--color-border-warm);
+  border-radius: var(--radius-frame);
+  background: var(--color-surface-panel);
+  box-shadow: var(--shadow-panel-depth);
+  text-align: center;
+}
+
+.starter-dashboard p,
+.starter-dashboard h1,
+.starter-dashboard span {
+  margin: 0;
+}
+
+.starter-dashboard p {
+  color: var(--color-action-primary);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.starter-dashboard span {
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.starter-dashboard button {
+  min-height: 3.75rem;
+  border: 2px solid var(--color-action-primary-depth);
+  border-radius: var(--radius-control);
+  background: var(--color-action-primary);
+  box-shadow: 0 5px 0 var(--color-action-primary-depth);
+  color: var(--color-text-on-action);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.starter-dashboard button:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}

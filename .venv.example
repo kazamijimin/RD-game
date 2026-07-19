@@ -1,0 +1,6 @@
+# Development toolchain reference. This is not a Python virtual environment.
+# Python is not an approved game runtime or backend.
+NODE_VERSION=22-or-newer-LTS
+PNPM_VERSION=10.34.5
+PHP_VERSION=8.3-or-newer
+DATABASE=PostgreSQL-via-main-ReaDirect-Laravel-API-only
