@@ -67,7 +67,8 @@ The main design characteristics are:
 - Dark navy text for a calm, dependable visual anchor.
 - Orange as the main action color.
 - Large rounded containers and pill-shaped controls.
-- Chunky headings and large button labels.
+- Large Jersey 20 pixel typography for learner headings, interface text, and
+  button labels.
 - Solid offset depth that makes containers and buttons feel game-like.
 - One clear primary action in each learner panel.
 - Generous whitespace between instructions and controls.
@@ -123,6 +124,26 @@ screen is otherwise minimal.
 
 The target appearance is a minimal vector game interface, not flat corporate
 software and not realistic three-dimensional rendering.
+
+### Pixel-game typography rules
+
+Pixel typography is a mandatory part of the learner design language, not a
+page-specific decoration.
+
+- Jersey 20 is the default interface face from the Intro through Home, learner
+  sign-in, dashboard, assessments, lessons, Game Lobby, and games.
+- Learner headings, buttons, badges, navigation, short instructions, and status
+  labels use Jersey 20 through shared semantic font variables.
+- Keep Jersey 20 deliberately large. Its minimum primary-button size is `30px`;
+  reducing it to conventional dashboard sizes breaks the intended design.
+- Use only one pixel family in the rendered interface. Pixelify Sans is a local
+  loading fallback, not a second decorative font to mix into a page.
+- Authored reading content switches to Lexend so children evaluate clean
+  letterforms rather than stylized pixel glyphs.
+- Authenticated staff workspaces remain professional Lexend interfaces and do
+  not inherit learner pixel typography.
+- Font selection and scale must be applied through shared page scopes and
+  tokens, never through page-local literal family names.
 
 ## Big And Simple Rules
 
@@ -190,6 +211,7 @@ After staff login, dashboards must retain these ReaDirect foundations:
   interface texture.
 - Lexend typography for dashboard content, forms, tables, and controls.
 - Fredoka only for the ReaDirect brand and short high-level page titles.
+- Jersey 20 is not used inside authenticated professional staff workspaces.
 - Shared buttons, surfaces, fields, badges, focus treatment, and responsive
   foundations.
 - The standard tactile button commit interval before navigation or major
@@ -227,104 +249,143 @@ game screen.
 
 ### Font families
 
-Use the following font pairing:
+Jersey 20 is the canonical default font for the learner experience. Its large,
+blocky pixel forms reinforce the vector-game language and remain visible on
+small screens. The approved roles are:
 
-- **Fredoka** for display headings, short learner prompts, badges, and large
-  button labels.
-- **Lexend** for instructions, passages, form labels, helper text, dashboard
-  content, and longer reading text.
-- `ui-rounded`, `system-ui`, and `sans-serif` as fallbacks.
+- **Jersey 20** for the Intro, Home, learner sign-in, learner dashboard,
+  learner-facing navigation, Game Lobby, game chrome, headings, short prompts,
+  badges, support labels, and button labels.
+- **Lexend** for authored letters, words, phrases, sentences, passages,
+  comprehension text, longer instructions, form-heavy staff content, tables,
+  and dense professional interfaces.
+- **Fredoka** only for the ReaDirect brand and short high-level titles inside
+  the professional staff workspace.
+- **Pixelify Sans** as the first local fallback if Jersey 20 cannot load.
+- `ui-monospace`, `ui-rounded`, `system-ui`, and `sans-serif` only as final
+  platform fallbacks appropriate to the role.
 
-Fredoka supplies the friendly, rounded personality. Lexend supplies a calmer
-reading face for longer content. Do not use Fredoka for passages or dense staff
-tables.
+Jersey 20 is provided as one regular face. Do not depend on unavailable Jersey
+20 weight variants or synthetic bolding. Establish learner hierarchy through
+the approved size tokens, color, spacing, and component depth. Lexend remains
+mandatory wherever letterform clarity and sustained reading are more important
+than interface personality.
 
-Both families are available in the Google Fonts repository under the SIL Open
-Font License 1.1:
+The approved families are available in the Google Fonts repository under the
+SIL Open Font License 1.1:
 
-- <https://github.com/google/fonts/tree/main/ofl/fredoka>
+- <https://github.com/google/fonts/tree/main/ofl/jersey20>
+- <https://github.com/google/fonts/tree/main/ofl/pixelifysans>
 - <https://github.com/google/fonts/tree/main/ofl/lexend>
+- <https://github.com/google/fonts/tree/main/ofl/fredoka>
 
 Font files must be self-hosted. Runtime pages must not depend on a third-party
 font CDN.
+
+Font families and the learner type scale are semantic variables owned by
+`packages/design-tokens`. Components must use `--font-pixel-family`,
+`--font-display-family`, `--font-reading-family`, `--font-interface-family`, and
+the approved type-scale variables. Literal family stacks are allowed only in
+the token definition and required `@font-face` declarations.
+
+The shared `learner-typography-page` scope applies the learner family and scale
+without adding a background. The Intro uses this scope. The shared
+`learner-flow-page` scope applies the same typography plus the themed responsive
+background. Home, learner sign-in, learner dashboards, assessments, lessons,
+the Game Lobby, and learner game routes use `learner-flow-page`. Page-local CSS
+must not redefine the default learner font stack.
 
 Store browser-ready files in:
 
 ```text
 apps/web/public/assets/fonts/
-|-- fredoka-variable.woff2
-\-- lexend-variable.woff2
+|-- jersey-20-regular.woff2
+|-- jersey-20-OFL.txt
+|-- pixelify-sans-variable.woff2
+|-- pixelify-sans-OFL.txt
+|-- lexend-variable.woff2
+\-- fredoka-variable.woff2
 ```
 
-Keep original font packages and license records in the top-level asset library:
-
-```text
-assets/fonts/
-|-- fredoka/
-\-- lexend/
-
-assets/licenses/fonts/
-|-- fredoka-ofl.txt
-\-- lexend-ofl.txt
-```
+The current Jersey 20 and Pixelify Sans OFL records live beside their
+browser-ready files. If original font packages are archived later, keep them
+under `assets/fonts/` and do not load those source packages at runtime.
 
 ### Font loading reference
 
 ```css
 @font-face {
-  font-family: "Fredoka";
-  src: url("/assets/fonts/fredoka-variable.woff2") format("woff2");
+  font-family: "Jersey 20";
+  src: url("/assets/fonts/jersey-20-regular.woff2") format("woff2");
   font-style: normal;
-  font-weight: 400 700;
+  font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Lexend";
-  src: url("/assets/fonts/lexend-variable.woff2") format("woff2");
+  font-family: "Pixelify Sans";
+  src: url("/assets/fonts/pixelify-sans-variable.woff2") format("woff2");
   font-style: normal;
   font-weight: 400 700;
   font-display: swap;
 }
+
+/* Lexend and Fredoka remain self-hosted for their approved exception roles. */
 ```
 
-Preload only the font files needed above the fold. Avoid loading separate files
-for many weights when a validated variable font is available.
+Preload Jersey 20 on learner entry routes when font preloading is used. Preload
+only the font files needed above the fold. Avoid loading separate files for many
+weights when a validated variable font is available.
 
 ### Type scale
 
-Learner typography uses fluid sizes with conservative limits:
+Learner typography uses deliberately oversized fluid sizes:
 
-| Token            | Mobile size | Large-screen size | Font            | Intended use                      |
-| ---------------- | ----------: | ----------------: | --------------- | --------------------------------- |
-| `display`        |        36px |              52px | Fredoka 700     | Celebration or major lesson title |
-| `page-title`     |        30px |              40px | Fredoka 700     | Screen title                      |
-| `panel-title`    |        24px |              30px | Fredoka 650-700 | Main panel heading                |
-| `learner-prompt` |        21px |              26px | Fredoka 600-700 | Short task prompt                 |
-| `button-large`   |        19px |              22px | Fredoka 650-700 | Primary learner action            |
-| `body-large`     |        18px |              20px | Lexend 500-600  | Learner instruction               |
-| `body`           |        16px |              18px | Lexend 400-500  | General content                   |
-| `support`        |        14px |              16px | Lexend 500-600  | Noncritical supporting text       |
+| Token            | Mobile size | Large-screen size | Default learner font | Intended use                          |
+| ---------------- | ----------: | ----------------: | -------------------- | ------------------------------------- |
+| `display`        |        48px |              68px | Jersey 20 400        | Celebration or major lesson title     |
+| `page-title`     |        40px |              52px | Jersey 20 400        | Screen title                          |
+| `panel-title`    |        32px |              40px | Jersey 20 400        | Main panel heading                    |
+| `learner-prompt` |        28px |              34px | Jersey 20 400        | Short task prompt                     |
+| `button-large`   |        30px |              36px | Jersey 20 400        | Primary learner action                |
+| `body-large`     |        24px |              27px | Jersey 20 400        | Short learner instruction or control  |
+| `body`           |        21px |              24px | Jersey 20 400        | General learner interface content     |
+| `support`        |        18px |              20px | Jersey 20 400        | Noncritical learner interface support |
+
+Authored reading material uses the corresponding approved size token but
+switches to `--font-reading-family`. The font-family exception must not reduce
+the font size.
 
 Critical instructions must never use the `support` size.
 
 Recommended fluid values:
 
 ```css
-:root {
-  --font-display: clamp(2.25rem, 1.8rem + 2vw, 3.25rem);
-  --font-page-title: clamp(1.875rem, 1.6rem + 1.2vw, 2.5rem);
-  --font-panel-title: clamp(1.5rem, 1.35rem + 0.7vw, 1.875rem);
-  --font-learner-prompt: clamp(1.3125rem, 1.18rem + 0.5vw, 1.625rem);
-  --font-button-large: clamp(1.1875rem, 1.08rem + 0.4vw, 1.375rem);
-  --font-body-large: clamp(1.125rem, 1.06rem + 0.25vw, 1.25rem);
-  --font-body: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+.learner-typography-page,
+.learner-flow-page {
+  --font-display-family: var(--font-pixel-family);
+  --font-interface-family: var(--font-pixel-family);
+  --font-display: clamp(3rem, 2.35rem + 2.7vw, 4.25rem);
+  --font-page-title: clamp(2.5rem, 2.05rem + 1.7vw, 3.25rem);
+  --font-panel-title: clamp(2rem, 1.78rem + 0.95vw, 2.5rem);
+  --font-learner-prompt: clamp(1.75rem, 1.55rem + 0.75vw, 2.125rem);
+  --font-button-large: clamp(1.875rem, 1.65rem + 0.85vw, 2.25rem);
+  --font-body-large: clamp(1.5rem, 1.36rem + 0.5vw, 1.6875rem);
+  --font-body: clamp(1.3125rem, 1.2rem + 0.4vw, 1.5rem);
+  --font-support: clamp(1.125rem, 1.04rem + 0.3vw, 1.25rem);
+  font-family: var(--font-interface-family);
 }
 ```
 
 ### Typography rules
 
 - Use sentence case for buttons and headings.
+- Jersey 20 is the default on every learner-facing interface, including Intro.
+- Do not replace Jersey 20 page by page or hard-code a learner font family.
+- Use Lexend for authored reading targets, passages, comprehension content,
+  sustained instructions, and authenticated staff workspace content.
+- Do not use the pixel face as a reason to reduce the approved learner sizes.
+- Do not simulate unavailable Jersey 20 weights.
 - Do not write long instructions in all caps.
 - Use all caps only for very short status badges when useful.
 - Use a minimum body line height of `1.5`.
@@ -387,8 +448,12 @@ and contrast testing, but their semantic roles must remain stable.
   --asset-home-background-desktop: url("/assets/backgrounds/T1desktop.png");
 
   /* Font families */
-  --font-display-family: "Fredoka", ui-rounded, system-ui, sans-serif;
+  --font-pixel-family:
+    "Jersey 20", "Pixelify Sans", "Courier New", ui-monospace, monospace;
+  --font-display-family:
+    "Fredoka", "Arial Rounded MT Bold", ui-rounded, system-ui, sans-serif;
   --font-reading-family: "Lexend", system-ui, sans-serif;
+  --font-interface-family: var(--font-reading-family);
 
   /* Surfaces */
   --color-transparent: transparent;
@@ -626,7 +691,7 @@ must look obviously pressable before hover or focus occurs.
 Use for the one main action in the current panel.
 
 - Minimum height: `60px`; prefer `64px` for major actions.
-- Minimum text size: `19px`.
+- Minimum text size: `30px`.
 - Horizontal padding: at least `24px`.
 - Icon size: normally `24px` to `28px`.
 - Strong orange fill with a darker lower edge.
@@ -638,6 +703,7 @@ Use for the one main action in the current panel.
 Use for a safe alternative such as `Hear again` or `Try again`.
 
 - Minimum height: `52px`.
+- Minimum text size: `24px`.
 - White or lightly tinted surface.
 - Visible warm border.
 - Dark navy label.
@@ -712,7 +778,7 @@ interface BigButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const baseButtonClass =
   "inline-flex max-w-full select-none items-center justify-center gap-3 " +
-  "[font-family:var(--font-display-family)] font-bold leading-none " +
+  "[font-family:var(--font-display-family)] font-normal leading-none " +
   "transition-[transform,box-shadow,background-color,border-color] " +
   "duration-150 ease-out focus-visible:outline-none focus-visible:ring-[3px] " +
   "focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 " +
@@ -853,7 +919,7 @@ Use a `kbd` element for the key cap:
 ```tsx
 <p className="[font-family:var(--font-reading-family)] text-base text-[var(--color-text-secondary)]">
   Press{" "}
-  <kbd className="rounded-lg border border-[var(--color-border-soft)] bg-[var(--color-action-secondary)] px-2 py-1 font-semibold text-[var(--color-action-primary)] shadow-[0_2px_0_var(--color-border-warm)]">
+  <kbd className="rounded-lg border border-[var(--color-border-soft)] bg-[var(--color-action-secondary)] px-2 py-1 font-normal text-[var(--color-action-primary)] shadow-[0_2px_0_var(--color-border-warm)]">
     Space
   </kbd>{" "}
   to record.
@@ -878,7 +944,7 @@ export function RecordingPanelView() {
             <div className="grid gap-6">
               <header className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4">
                 <div className="min-w-0">
-                  <h1 className="[font-family:var(--font-display-family)] text-[length:var(--font-panel-title)] font-bold leading-tight text-[var(--color-text-primary)]">
+                  <h1 className="[font-family:var(--font-display-family)] text-[length:var(--font-panel-title)] font-normal leading-tight text-[var(--color-text-primary)]">
                     My audio
                   </h1>
                   <p className="mt-2 max-w-[38ch] [font-family:var(--font-reading-family)] text-[length:var(--font-body)] leading-relaxed text-[var(--color-text-secondary)]">
@@ -886,13 +952,13 @@ export function RecordingPanelView() {
                   </p>
                 </div>
 
-                <span className="inline-flex min-h-9 items-center rounded-[var(--radius-pill)] border border-[var(--color-action-primary)] px-4 [font-family:var(--font-display-family)] text-sm font-bold text-[var(--color-action-primary)]">
+                <span className="inline-flex min-h-9 items-center rounded-[var(--radius-pill)] border border-[var(--color-action-primary)] px-4 [font-family:var(--font-display-family)] text-[length:var(--font-support)] font-normal text-[var(--color-action-primary)]">
                   Ready
                 </span>
               </header>
 
               <Surface kind="notice" padding="compact">
-                <p className="text-center [font-family:var(--font-display-family)] text-[length:var(--font-learner-prompt)] font-semibold leading-snug text-[var(--color-text-primary)]">
+                <p className="text-center [font-family:var(--font-display-family)] text-[length:var(--font-learner-prompt)] font-normal leading-snug text-[var(--color-text-primary)]">
                   Minimum 0.5 seconds for transcription.
                 </p>
               </Surface>
@@ -1162,7 +1228,7 @@ communicates the change.
 - Use SVG for interface icons.
 - Use solid fills and strokes; gradients are prohibited.
 - Use separate flat shapes when an icon needs highlights or darker areas.
-- Keep icon stroke weight visually compatible with the rounded typography.
+- Keep icon stroke weight visually compatible with the blocky pixel typography.
 - Use `currentColor` so icons inherit button or text color.
 - Decorative SVGs must use `aria-hidden="true"`.
 - Meaningful icon-only controls require an accessible name.
@@ -1348,6 +1414,8 @@ Do not:
 - Put several equally dominant buttons in one panel.
 - Use all caps for paragraphs or long button labels.
 - Use decorative fonts for passages or dense instructions.
+- Mix multiple decorative pixel families in one rendered interface.
+- Simulate unavailable Jersey 20 weights with synthetic bolding.
 - Use light grey text on cream without checking contrast.
 - Create a clickable `div` instead of a semantic button or link.
 - Use hover-only instructions.

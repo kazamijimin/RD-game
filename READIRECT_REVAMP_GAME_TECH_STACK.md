@@ -185,6 +185,12 @@ Host chrome always follows the ReaDirect design system:
 - Achievement presentation.
 - Touch-control chrome outside the game canvas.
 
+The host applies the shared `learner-flow-page` scope. Jersey 20 is therefore
+the required font for game menus, navigation, dialogs, status labels, and touch
+chrome. Authored reading targets and sustained instructions use Lexend at the
+same approved learner size. Pixelify Sans is only the Jersey 20 loading fallback;
+games must not add or mix another decorative pixel font.
+
 A game may use its own art direction inside the gameplay stage. A simple game
 without original art or graphics must use the ReaDirect starter button,
 container, typography, color-token, and fake-depth patterns documented in
@@ -200,7 +206,9 @@ Approved browser-ready formats include:
 - SVG, WebP, AVIF, and optimized PNG images.
 - OGG, MP3, and WebM audio where supported by the application standard.
 - JSON map, atlas, animation, and configuration data.
-- WOFF2 fonts already approved by ReaDirect.
+- The self-hosted Jersey 20, Pixelify Sans, Lexend, and Fredoka WOFF2 files
+  already approved by ReaDirect. Game modules must not bundle replacement
+  interface fonts.
 
 Runtime assets belong in the module's src/assets directory and are imported by
 the module so Vite can fingerprint them. Editable sources and licenses belong

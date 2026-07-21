@@ -144,8 +144,9 @@ GAME_DESIGN.md must be completed before gameplay development. It must define:
 7. KAPLAY or PixiJS selection.
 8. Whether meaningful progression exists.
 9. Automatic checkpoints, one-slot save payload, and restart behavior.
-10. Original, third-party, and no-original-assets design sources.
-11. Shared records used and every proposed game-specific table.
+10. Interface typography compliance and any gameplay-world text treatment.
+11. Original, third-party, and no-original-assets design sources.
+12. Shared records used and every proposed game-specific table.
 
 The owner assigns permanent achievement keys and fixed gallery positions during
 integration. Achievement artwork is produced centrally by the owner.
@@ -410,8 +411,8 @@ export function GameButton({
   background: var(--color-action-primary);
   box-shadow: 0 8px 0 var(--color-action-primary-depth);
   font-family: var(--font-display-family);
-  font-size: clamp(1.2rem, 5vw, 1.6rem);
-  font-weight: 700;
+  font-size: var(--font-button-large);
+  font-weight: 400;
   line-height: 1;
   touch-action: manipulation;
   cursor: pointer;
@@ -469,15 +470,22 @@ export function GameContainer({
 .game-container h2 {
   margin: 0;
   font-family: var(--font-display-family);
+  font-weight: 400;
   line-height: 1.1;
 }
 
 .game-container p {
   font-family: var(--font-reading-family);
-  font-size: max(1rem, 16px);
+  font-size: var(--font-body);
   line-height: 1.5;
 }
 ```
+
+Game chrome inherits Jersey 20 and the enlarged learner type scale from
+`learner-flow-page`. Primary game-button text must be at least `30px` on the
+supported mobile viewport. Authored reading targets and sustained instructions
+switch to Lexend through `--font-reading-family` without reducing the approved
+font-size token. Games must not introduce another decorative pixel font.
 
 Do not hard-code substitute colors or add blurred corporate-style shadows.
 Games with custom art may style their gameplay world independently, but their
@@ -587,6 +595,10 @@ sequence.
 ### Frontend
 
 - [ ] React uses exactly one of KAPLAY or PixiJS for the main gameplay canvas.
+- [ ] Menus, dialogs, navigation, loading, errors, and touch chrome inherit the
+      shared Jersey 20 learner typography and approved enlarged type scale.
+- [ ] Authored reading content uses Lexend, and no additional decorative pixel
+      font or synthetic Jersey 20 weight is introduced.
 - [ ] The module exports only its public manifest and route.
 - [ ] The route opens the mandatory menu first.
 - [ ] Play or Continue, New Game where applicable, How to Play, sound, and Back

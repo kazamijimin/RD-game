@@ -43,6 +43,13 @@ state that refresh abandons the current run.
 List original and third-party assets, licenses, runtime formats, and whether the
 game uses the ReaDirect no-original-assets visual starter.
 
+## Interface Typography
+
+Confirm that game menus and chrome inherit Jersey 20 and the shared enlarged
+learner type scale, while authored reading content and sustained instructions
+use Lexend. Document any gameplay-world text treatment and verify that it does
+not introduce a second decorative pixel font or synthesize Jersey 20 weights.
+
 ## Database Needs
 
 List the shared game records used and every proposed game-specific table, field,

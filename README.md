@@ -6,6 +6,9 @@
 > 3. The assigned game's menu must keep its **Back to Lobby** control and the navigation target `/learner/games`. Do not remove, rename, bypass, or change that routing logic.
 > 4. Every game is portrait-only and touch-first. Use a 9:16 reference stage on mobile, tablet, and desktop. A desktop display must keep the game centered vertically in a portrait stage; the surrounding page is background only.
 > 5. Use only the approved stack. Phaser is prohibited. Do not add another engine, backend, database, deployment target, or package without written project-owner approval.
+> 6. Game menus and interface chrome use the shared Jersey 20 pixel typography.
+>    Use Lexend only for authored reading content and sustained instructions;
+>    do not add another decorative pixel font.
 
 # RD-game contributor starter
 
@@ -147,11 +150,15 @@ For game two, use the corresponding files under `apps/games/game-two/`.
 The placeholder route page already contains the mandatory React menu and
 portrait host. Replace the placeholder gameplay area, but preserve the menu
 entry behavior and Back to Lobby logic. Selecting a game must always open its
-menu before gameplay begins.
+menu before gameplay begins. Keep menu, dialog, navigation, loading, error, and
+touch-control chrome on the shared `learner-flow-page` design language: Jersey
+20 at the enlarged learner scale, semantic design tokens, solid vector shapes,
+and hard-edged fake depth. Use Lexend for authored reading targets and sustained
+instructions without shrinking the corresponding type token.
 
 Complete `GAME_DESIGN.md` before developing gameplay. It must define the
 educational objective, game loop, controls, scoring, achievements, selected
-engine, save behavior, assets, and database needs.
+engine, save behavior, interface typography, assets, and database needs.
 
 ## Required reading
 
@@ -184,6 +191,10 @@ API and resolve the authenticated player there.
 - Back to Lobby still navigates to `/learner/games`.
 - The game remains 9:16 portrait on desktop as well as mobile.
 - Touch controls provide every required action.
+- Game chrome uses Jersey 20 through the shared semantic font variables, with
+  at least `30px` primary-button text on the supported mobile viewport.
+- Authored reading content uses Lexend; no replacement decorative pixel font or
+  synthetic Jersey 20 weight is bundled.
 - `GAME_DESIGN.md` is complete.
 - Only React plus one approved game engine is present.
 - Assets and their licenses are committed in the required locations.
