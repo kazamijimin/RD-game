@@ -16,5 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "apps/games"]
+  "include": ["src", "apps/games"],
+  "exclude": ["apps/games/**/*.test.ts", "apps/games/**/*.test.tsx"]
 }
