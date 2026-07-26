@@ -536,10 +536,10 @@ export function GameRoutePage() {
   }, [closeExitDialog, exitDialogOpen]);
 
   return (
-    <main lang={missionState.language} className="game-route relative h-dvh w-screen max-w-full overflow-hidden bg-[#081510] text-white">
+    <main lang={missionState.language} className="game-route">
       <section
         aria-label={`${copy.gameTitle} ${copy.gameHost}`}
-        className="game-route__stage relative h-full min-w-0 w-full overflow-hidden"
+        className="game-route__stage"
       >
         <header className="pointer-events-none absolute inset-x-0 top-0 z-50 flex items-start justify-between gap-4 bg-gradient-to-b from-[#081510]/85 to-transparent px-[max(0.75rem,env(safe-area-inset-left))] py-[max(0.75rem,env(safe-area-inset-top))]">
           <div className="min-w-0">
@@ -589,11 +589,11 @@ export function GameRoutePage() {
           </div>
         </header>
 
-        <div className="game-route__canvas-layer absolute inset-0 grid min-w-0 max-w-full place-items-center overflow-hidden bg-[#173326]">
+        <div className="game-route__canvas-layer">
           <div
             ref={containerRef}
             data-testid="game-canvas-container"
-            className="game-route__canvas-host grid h-full min-h-[240px] min-w-0 w-full max-w-full place-items-center overflow-hidden"
+            className="game-route__canvas-host"
           />
 
           {status === "loading" && (

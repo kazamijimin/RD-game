@@ -79,6 +79,15 @@ describe("focused tutorial overlay", () => {
     expect(screen.queryByText(/No approved narration recording/i)).not.toBeInTheDocument();
   });
 
+  it("docks above the activity when the saved tutorial target is not rendered", () => {
+    render(<TutorialOverlay {...props(tutorialState("answerLater"))} />);
+    expect(document.querySelector(".tutorial-narrator")).toHaveClass("is-targetless");
+  });
+
+  it("uses the activity intro as a responsive fallback before Answer Later appears", () => {
+    expect(tutorialTarget("answerLater", false)).toContain(".activity-intro-panel");
+  });
+
   it("advances the focused navigation lessons and keeps them skippable", async () => {
     const user = userEvent.setup();
     const onAdvance = vi.fn();

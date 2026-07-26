@@ -2596,6 +2596,13 @@ a:focus-visible {
   bottom: max(0.75rem, env(safe-area-inset-bottom));
 }
 
+.tutorial-narrator.is-targetless {
+  top: max(6.25rem, calc(env(safe-area-inset-top) + 5.5rem));
+  bottom: auto;
+  width: min(42rem, calc(100vw - 1.5rem));
+  max-height: min(12rem, calc(100dvh - 7rem));
+}
+
 .tutorial-narrator.is-reading-step:not(.is-side) {
   width: min(38rem, calc(100vw - 1.5rem));
 }
@@ -2945,6 +2952,12 @@ a:focus-visible {
     max-height: 10.5rem;
     grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.9fr);
     padding: 0.55rem 0.7rem;
+  }
+
+  .tutorial-narrator.is-targetless {
+    top: max(4.5rem, calc(env(safe-area-inset-top) + 4rem));
+    width: min(36rem, calc(100vw - 1rem));
+    max-height: calc(100dvh - 5rem);
   }
 
   .tutorial-copy {

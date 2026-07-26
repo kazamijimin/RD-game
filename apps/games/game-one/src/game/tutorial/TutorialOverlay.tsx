@@ -76,7 +76,7 @@ export function TutorialOverlay({
         role="dialog"
         aria-modal="true"
         aria-labelledby="tutorial-speaker"
-        className={`tutorial-narrator ${readingStep ? "is-reading-step " : ""}${placeAtSide ? `is-side is-${sidePlacement}` : placeAtTop ? "is-top" : "is-bottom"}`}
+        className={`tutorial-narrator ${readingStep ? "is-reading-step " : ""}${!target ? "is-targetless" : placeAtSide ? `is-side is-${sidePlacement}` : placeAtTop ? "is-top" : "is-bottom"}`}
         style={narratorStyle}
         onClick={() => {
           if (!typewriter.isComplete) typewriter.complete();

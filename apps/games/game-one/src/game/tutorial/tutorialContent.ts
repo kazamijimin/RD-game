@@ -47,7 +47,7 @@ export function tutorialTarget(step: TutorialState["step"], interactionAvailable
     case "reading": return ".story-panel";
     case "readAgain": return '[data-tutorial="read-again"], .story-panel';
     case "choice": return ".answer-choice";
-    case "answerLater": return '[data-tutorial="answer-later"]';
+    case "answerLater": return '[data-tutorial="answer-later"], .activity-intro-panel';
     case "ready": return '[data-tutorial="finish"]';
   }
 }
