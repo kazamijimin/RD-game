@@ -64,7 +64,7 @@ describe("player movement", () => {
   });
 
   it("allows movement into ordinary garden grass while solid objects remain blocked", () => {
-    const position = { x: 4 * TILE_SIZE, y: 12 * TILE_SIZE };
+    const position = { x: 4 * TILE_SIZE, y: 13 * TILE_SIZE };
     const moved = movePlayer({
       position,
       input: { x: -1, y: 0 },

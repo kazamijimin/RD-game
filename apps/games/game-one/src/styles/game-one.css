@@ -3102,6 +3102,25 @@ a:focus-visible {
   max-height: min(12rem, calc(100dvh - 7rem));
 }
 
+.tutorial-narrator.is-ready {
+  top: 50%;
+  bottom: auto;
+  width: min(30rem, calc(100vw - 1.5rem));
+  max-height: calc(100dvh - 1.5rem);
+  grid-template-columns: 1fr;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.tutorial-narrator.is-ready .tutorial-tools {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.tutorial-narrator.is-ready .tutorial-finish {
+  grid-column: 1 / -1;
+  min-height: 3.25rem;
+}
+
 .tutorial-narrator.is-reading-step:not(.is-side) {
   width: min(38rem, calc(100vw - 1.5rem));
 }
@@ -3459,6 +3478,12 @@ a:focus-visible {
     top: max(4.5rem, calc(env(safe-area-inset-top) + 4rem));
     width: min(36rem, calc(100vw - 1rem));
     max-height: calc(100dvh - 5rem);
+  }
+
+  .tutorial-narrator.is-ready {
+    top: 50%;
+    width: min(28rem, calc(100vw - 1rem));
+    max-height: calc(100dvh - 1rem);
   }
 
   .tutorial-copy {
@@ -4139,4 +4164,434 @@ a:focus-visible {
   .reading-heart { width: 1.4rem; font-size: 1.2rem; }
   .heart-recovery-panel { padding: 1rem; }
   .heart-recovery-actions > button { width: 100%; }
+}
+
+/* Unified retro container system */
+.game-route {
+  --container-ink: #163d32;
+  --container-shadow: #0d4a39;
+  --container-gold: #f2b632;
+  --container-paper: #fff8df;
+  --container-paper-light: #fffdf4;
+  --container-muted: #e9cf90;
+  --container-coral: #d96745;
+}
+
+.mission-overlay,
+.map-overlay,
+.audio-settings-layer,
+.fishing-overlay,
+.language-selection-layer,
+.tutorial-confirm-layer,
+.game-modal-layer {
+  background: rgb(5 18 13 / 78%);
+}
+
+.dialogue-panel,
+.help-panel,
+.completion-panel,
+.story-panel,
+.question-panel,
+.heart-recovery-panel,
+.expanded-map-panel,
+.audio-settings-panel,
+.fishing-panel,
+.language-selection-panel,
+.tutorial-narrator,
+.tutorial-confirm,
+.game-modal-panel {
+  border: 3px solid var(--container-ink);
+  border-radius: 4px;
+  outline: 0;
+  box-shadow:
+    0 5px 0 var(--container-shadow),
+    0 10px 22px rgb(4 15 11 / 36%);
+}
+
+.dialogue-panel,
+.help-panel,
+.completion-panel,
+.story-panel,
+.question-panel,
+.heart-recovery-panel,
+.expanded-map-panel,
+.fishing-panel,
+.language-selection-panel,
+.tutorial-narrator,
+.tutorial-confirm,
+.game-modal-panel {
+  background: var(--container-paper);
+  color: #13251d;
+}
+
+.dialogue-panel,
+.help-panel,
+.completion-panel,
+.story-panel,
+.question-panel,
+.heart-recovery-panel,
+.expanded-map-panel,
+.fishing-panel,
+.language-selection-panel,
+.tutorial-narrator,
+.tutorial-confirm,
+.game-modal-panel,
+.audio-settings-panel {
+  position: relative;
+}
+
+.dialogue-panel::before,
+.help-panel::before,
+.completion-panel::before,
+.expanded-map-panel::before,
+.fishing-panel::before,
+.language-selection-panel::before,
+.tutorial-narrator::before,
+.tutorial-confirm::before,
+.game-modal-panel::before,
+.audio-settings-panel::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 5px;
+  background: var(--container-gold);
+  content: "";
+  pointer-events: none;
+}
+
+.pixel-reading-panel {
+  border-color: var(--container-ink);
+  border-radius: 4px;
+  background: var(--container-paper);
+  box-shadow:
+    0 5px 0 var(--container-shadow),
+    0 10px 22px rgb(4 15 11 / 36%);
+}
+
+.pixel-reading-panel::before {
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 5px;
+  background: var(--container-gold);
+}
+
+.audio-settings-panel {
+  border-color: var(--container-ink);
+  background: #102f24;
+  color: #fff7d6;
+}
+
+.audio-settings-header,
+.audio-settings-footer {
+  border-color: var(--container-gold);
+}
+
+.question-panel.pixel-reading-panel .question-footer {
+  border-color: var(--container-ink);
+  background: var(--container-muted);
+}
+
+.dialogue-panel h2,
+.help-panel h2,
+.completion-panel h2,
+.story-panel h2,
+.question-panel h2,
+.heart-recovery-panel h2,
+.expanded-map-panel h2,
+.fishing-panel h2,
+.language-selection-panel h2,
+.tutorial-confirm h2,
+.game-modal-panel h2 {
+  letter-spacing: 0;
+  line-height: 1.12;
+}
+
+.story-eyebrow,
+.language-selection-eyebrow,
+.tutorial-speaker,
+.fishing-header p {
+  color: #176b4d;
+}
+
+.story-primary,
+.dialogue-next,
+.fishing-primary,
+.game-modal-primary {
+  border: 2px solid var(--container-ink);
+  border-radius: 3px;
+  background: var(--container-gold);
+  color: #13251d;
+  box-shadow: 0 3px 0 var(--container-shadow);
+}
+
+.question-secondary,
+.dialogue-skip,
+.dialogue-tool,
+.fishing-cancel,
+.game-modal-secondary {
+  border: 2px solid #315343;
+  border-radius: 3px;
+  background: var(--container-paper-light);
+  color: #176b4d;
+  box-shadow: 0 3px 0 #b58b46;
+}
+
+.story-primary:active,
+.dialogue-next:active,
+.fishing-primary:active,
+.game-modal-primary:active,
+.question-secondary:active,
+.dialogue-skip:active,
+.dialogue-tool:active,
+.fishing-cancel:active,
+.game-modal-secondary:active {
+  box-shadow: 0 1px 0 var(--container-shadow);
+  transform: translateY(2px);
+}
+
+.tutorial-narrator {
+  background: var(--container-paper-light);
+}
+
+.tutorial-narrator.is-side {
+  border-color: var(--container-ink);
+  box-shadow:
+    0 4px 0 var(--container-shadow),
+    0 8px 18px rgb(4 15 11 / 32%);
+}
+
+.tutorial-tools {
+  min-width: 0;
+}
+
+.tutorial-tools button,
+.tutorial-confirm button {
+  min-width: 0;
+  border: 2px solid #315343;
+  border-radius: 3px;
+  background: var(--container-paper-light);
+  color: #176b4d;
+  overflow-wrap: anywhere;
+  box-shadow: 0 2px 0 #b58b46;
+}
+
+.tutorial-tools .tutorial-finish {
+  border-color: var(--container-ink);
+  background: var(--container-gold);
+  color: #13251d;
+}
+
+.exit-dialog-layer {
+  padding:
+    max(1rem, env(safe-area-inset-top))
+    max(1rem, env(safe-area-inset-right))
+    max(1rem, env(safe-area-inset-bottom))
+    max(1rem, env(safe-area-inset-left));
+}
+
+.exit-dialog-panel {
+  width: min(28rem, 100%);
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
+}
+
+@media (max-width: 700px), (orientation: landscape) and (max-height: 500px) {
+  .dialogue-panel,
+  .help-panel,
+  .completion-panel,
+  .story-panel,
+  .question-panel,
+  .heart-recovery-panel,
+  .expanded-map-panel,
+  .audio-settings-panel,
+  .fishing-panel,
+  .language-selection-panel,
+  .tutorial-narrator,
+  .tutorial-confirm,
+  .game-modal-panel {
+    border-width: 3px;
+    box-shadow:
+      0 3px 0 var(--container-shadow),
+      0 6px 14px rgb(4 15 11 / 30%);
+  }
+
+  .dialogue-panel::before,
+  .help-panel::before,
+  .completion-panel::before,
+  .expanded-map-panel::before,
+  .fishing-panel::before,
+  .language-selection-panel::before,
+  .tutorial-narrator::before,
+  .tutorial-confirm::before,
+  .game-modal-panel::before,
+  .audio-settings-panel::before,
+  .pixel-reading-panel::before {
+    height: 4px;
+  }
+}
+
+/* Accessible retro container typography */
+.game-route {
+  --container-body-font-size: 1.125rem;
+  --container-detail-font-size: 1rem;
+  --container-action-font-size: 1.1rem;
+}
+
+.dialogue-panel,
+.help-panel,
+.completion-panel,
+.story-panel,
+.question-panel,
+.heart-recovery-panel,
+.expanded-map-panel,
+.audio-settings-panel,
+.fishing-panel,
+.language-selection-panel,
+.tutorial-narrator,
+.tutorial-confirm,
+.game-modal-panel {
+  font-size: var(--container-body-font-size);
+  line-height: 1.5;
+}
+
+.dialogue-panel p,
+.help-panel > p,
+.completion-panel > p,
+.heart-recovery-panel > p,
+.game-modal-panel > p,
+.tutorial-confirm > p,
+.fishing-copy,
+.language-selection-panel > p:not(.language-selection-eyebrow),
+.tutorial-copy,
+.tutorial-narrator.is-side .tutorial-copy {
+  font-size: var(--container-body-font-size);
+  line-height: 1.5;
+}
+
+.story-panel h2,
+.help-panel h2,
+.completion-panel h2,
+.question-panel h2,
+.heart-recovery-panel h2,
+.expanded-map-panel h2,
+.fishing-panel h2,
+.language-selection-panel h2,
+.tutorial-confirm h2,
+.game-modal-panel h2,
+.audio-settings-title h2,
+.help-guide-panel .help-guide-header h2 {
+  font-size: 1.6rem;
+}
+
+.story-eyebrow,
+.language-selection-eyebrow,
+.tutorial-speaker,
+.fishing-header p,
+.audio-settings-title p,
+.audio-channel-section h3,
+.audio-mixer-section h3,
+.help-objective-band h3,
+.help-section-label {
+  font-size: var(--container-detail-font-size);
+  line-height: 1.25;
+}
+
+.dialogue-speaker,
+.reading-progress,
+.saved-question-count,
+.completion-summary dt,
+.help-objective-band p,
+.help-clue-copy,
+.help-strategy-section li,
+.help-controls-strip > span,
+.help-controls-strip kbd,
+.audio-console-mark,
+.audio-channel-code,
+.audio-channel-copy small,
+.audio-channel-status,
+.audio-volume output,
+.audio-settings-footer p,
+.fishing-header span,
+.fishing-reading-progress li > span,
+.fishing-reading-progress li strong,
+.expanded-map-objective {
+  font-size: var(--container-detail-font-size);
+}
+
+.help-objective-band strong,
+.audio-channel-copy strong,
+.audio-volume strong {
+  font-size: var(--container-body-font-size);
+}
+
+.dialogue-next,
+.dialogue-skip,
+.dialogue-tool,
+.story-primary,
+.question-secondary,
+.answer-later-button,
+.help-guide-actions button,
+.audio-close-button,
+.audio-language-button,
+.fishing-primary,
+.fishing-choices button,
+.fishing-cancel,
+.tutorial-tools button,
+.tutorial-confirm button,
+.game-modal-primary,
+.game-modal-secondary {
+  font-size: var(--container-action-font-size);
+  line-height: 1.3;
+}
+
+.completion-panel > p:nth-of-type(2) {
+  font-size: var(--container-body-font-size);
+  line-height: 1.5;
+}
+
+/* Keep compact in-world containers readable at a distance, too. */
+.mission-objective,
+.navigation-hud .navigation-mission-panel,
+.navigation-objective {
+  font-size: var(--container-body-font-size);
+  line-height: 1.4;
+}
+
+.navigation-mission-progress,
+.nearby-indicator,
+.navigation-trail-guide {
+  font-size: var(--container-detail-font-size);
+  line-height: 1.3;
+}
+
+.contextual-interact-button,
+.mission-action-button,
+.interaction-desktop-label,
+.interaction-mobile-label,
+.fishing-prompt-copy strong,
+.region-banner-copy strong {
+  font-size: var(--container-action-font-size);
+  line-height: 1.25;
+}
+
+.fishing-prompt-code,
+.region-banner-code {
+  font-size: var(--container-detail-font-size);
+}
+
+.fishing-prompt-copy small {
+  font-size: var(--container-detail-font-size);
+  line-height: 1.25;
+}
+
+.region-banner-copy > span {
+  font-size: var(--container-detail-font-size);
+  line-height: 1.2;
+}
+
+.region-banner-copy strong {
+  font-size: 1.25rem;
+  line-height: 1.2;
 }

@@ -4,8 +4,8 @@ import type { Point } from "../physics/collision";
 export const LANDMARK_IDS = [
   "village-guide-sign",
   "learning-hall-notice",
-  "farm-gate-sign",
   "reading-shrine",
+  "farm-gate-sign",
   "shrine-boat-warning-sign"
 ] as const;
 
