@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getMission, MISSIONS } from "../content/missions";
+import { getMission, getMissions, MISSIONS } from "../content/missions";
 import { createMissionRounds, createSeededRandom } from "../questions/questionRound";
 import {
   createInitialMissionState,
@@ -10,6 +10,23 @@ import {
 } from "./missionState";
 
 describe("connected mission journey state", () => {
+  it("switches to Filipino without losing prepared question choice IDs", () => {
+    const state = createInitialMissionState(
+      createMissionRounds(getMissions(), createSeededRandom(7))
+    );
+    const preparedChoiceIds = state.rounds.map((round) =>
+      round.questions.map((question) => question.choices.map(({ id }) => id))
+    );
+
+    const localized = missionReducer(state, { type: "SET_LANGUAGE", language: "fil" });
+
+    expect(localized.language).toBe("fil");
+    expect(localized.rounds.map((round) =>
+      round.questions.map((question) => question.choices.map(({ id }) => id))
+    )).toEqual(preparedChoiceIds);
+    expect(localized.round.questions[0]?.prompt).not.toBe(state.round.questions[0]?.prompt);
+  });
+
   it("starts with the first mission and all six stable rounds prepared", () => {
     const state = initialState();
     expect(state.missionId).toBe("plaza-welcome");

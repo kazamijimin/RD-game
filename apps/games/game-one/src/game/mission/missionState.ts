@@ -692,10 +692,13 @@ function localizeRound(round: QuestionRound, language: GameLanguage): QuestionRo
       const choicesById = new Map(localized.choices.map((choice) => [choice.id, choice]));
       return {
         ...localized,
-        choices: question.choices.map((choice) => {
-          const localizedChoice = choicesById.get(choice.id);
-          if (!localizedChoice) throw new Error(`Missing localized choice ${choice.id}.`);
-          return localizedChoice;
+        // The prepared round owns the stable choice IDs and answer key. The
+        // localized catalog only supplies the visible text and feedback.
+        correctChoiceId: question.correctChoiceId,
+        choices: question.choices.map((choice, index) => {
+          const localizedChoice = choicesById.get(choice.id) ?? localized.choices[index];
+          if (!localizedChoice) throw new Error(`Missing localized choice ${index} for ${question.id}.`);
+          return { ...choice, ...localizedChoice, id: choice.id };
         })
       };
     })
