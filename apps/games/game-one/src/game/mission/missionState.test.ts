@@ -57,6 +57,31 @@ describe("connected mission journey state", () => {
     expect(state.activeDialogue?.pages[0]).toMatch(/east path/i);
   });
 
+  it("opens a readable landmark without changing mission progress", () => {
+    const initial = initialState();
+    const state = missionReducer(initial, {
+      type: "ACTIVATE_INTERACTION",
+      target: {
+        id: "landmark:village-guide-sign",
+        kind: "landmark",
+        label: "Read the village guide sign",
+        description: "Read the village guide sign.",
+        position: { x: 0, y: 0 },
+        enabled: true,
+        optional: true,
+        landmarkId: "village-guide-sign"
+      }
+    });
+
+    expect(state.stage).toBe("approachStoryCharacter");
+    expect(state.missionId).toBe(initial.missionId);
+    expect(state.activeDialogue).toMatchObject({
+      kind: "landmark",
+      speakerName: "Village Guide Sign"
+    });
+    expect(missionReducer(state, { type: "SKIP_DIALOGUE" }).activeDialogue).toBeNull();
+  });
+
   it("keeps an incorrect action in place and strengthens support", () => {
     let state = actionState();
     const action = getMission(state.missionId).action;

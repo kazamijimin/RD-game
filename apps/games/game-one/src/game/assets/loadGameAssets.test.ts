@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
+import { GAME_ASSETS } from "./assetRegistry";
 import { loadGameAssets } from "./loadGameAssets";
 
 describe("loadGameAssets", () => {
@@ -11,7 +12,7 @@ describe("loadGameAssets", () => {
 
     expect(runtime.loadSprite).toHaveBeenCalledWith(
       "learner-walk",
-      "/assets/game/characters/learner/villager-walk.png",
+      GAME_ASSETS.learnerWalk.path,
       expect.objectContaining({
         sliceX: 4,
         sliceY: 4,
@@ -25,21 +26,44 @@ describe("loadGameAssets", () => {
     );
     expect(runtime.loadSprite).toHaveBeenCalledWith(
       "tileset-water",
-      "/assets/game/tiles/tileset-water.png",
+      GAME_ASSETS.tilesetWater.path,
       expect.objectContaining({ sliceX: 28, sliceY: 17 })
     );
     expect(runtime.loadSprite).toHaveBeenCalledWith(
       "npc-lolo-ambo",
-      "/assets/game/characters/npcs/lolo-ambo-idle.png",
+      GAME_ASSETS.npcLoloAmbo.path,
       expect.objectContaining({ sliceX: 4, sliceY: 1 })
     );
     expect(runtime.loadSprite).toHaveBeenCalledWith(
+      "ambient-miss-yuuri",
+      GAME_ASSETS.ambientMissYuuri.path,
+      expect.objectContaining({ sliceX: 4, sliceY: 4 })
+    );
+    expect(runtime.loadSprite).toHaveBeenCalledWith(
+      "ambient-mang-panda",
+      GAME_ASSETS.ambientMangPanda.path,
+      expect.objectContaining({ sliceX: 4, sliceY: 4 })
+    );
+    expect(runtime.loadSprite).toHaveBeenCalledWith(
+      "ambient-mr-kikushibu",
+      GAME_ASSETS.ambientMrKikushibu.path,
+      expect.objectContaining({ sliceX: 4, sliceY: 4 })
+    );
+    expect(runtime.loadSprite).toHaveBeenCalledWith(
+      "river-boat",
+      GAME_ASSETS.riverBoat.path
+    );
+    expect(runtime.loadSprite).toHaveBeenCalledWith(
+      "reading-shrine",
+      GAME_ASSETS.readingShrine.path
+    );
+    expect(runtime.loadSprite).toHaveBeenCalledWith(
       "map-fragment",
-      "/assets/game/items/map-fragment.png"
+      GAME_ASSETS.mapFragment.path
     );
     expect(runtime.loadSprite).toHaveBeenCalledWith(
       "village-learning-hall",
-      "/assets/game/tiles/tileset-house.png"
+      GAME_ASSETS.villageLearningHall.path
     );
   });
 

@@ -1,3 +1,26 @@
+import tilesetFloorUrl from "../../assets/game/tiles/tileset-floor.png";
+import tilesetNatureUrl from "../../assets/game/tiles/tileset-nature.png";
+import tilesetWaterUrl from "../../assets/game/tiles/tileset-water.png";
+import tilesetHouseUrl from "../../assets/game/tiles/tileset-house.png";
+import learnerIdleUrl from "../../assets/game/characters/learner/yato-walk.png";
+import learnerWalkUrl from "../../assets/game/characters/learner/yato-walk.png";
+import blueHairExplorerUrl from "../../assets/game/characters/learner/blue-hair-explorer-v2.png";
+import ambientMissYuuriUrl from "../../assets/game/characters/ambient/miss-yuuri-walk.png";
+import ambientMangPandaUrl from "../../assets/game/characters/ambient/mang-panda-walk.png";
+import ambientMrKikushibuUrl from "../../assets/game/characters/ambient/mr-kikushibu-walk.png";
+import npcMissEstelleUrl from "../../assets/game/characters/npcs/miss-estelle-idle.png";
+import npcLoloAmboUrl from "../../assets/game/characters/npcs/lolo-ambo-idle.png";
+import npcMarketVendorUrl from "../../assets/game/characters/npcs/market-vendor-idle.png";
+import npcBridgeKeeperUrl from "../../assets/game/characters/npcs/bridge-keeper-idle.png";
+import mapFragmentUrl from "../../assets/game/items/map-fragment.png";
+import treeRoundUrl from "../../assets/game/props/tree-round.png";
+import treeWideUrl from "../../assets/game/props/tree-wide.png";
+import stumpOrangeUrl from "../../assets/game/props/stump-orange.png";
+import rockSmallUrl from "../../assets/game/props/rock-small.png";
+import readingShrineUrl from "../../assets/game/props/reading-shrine.png";
+import riverBoatUrl from "../../assets/game/vehicles/river-boat.png";
+import ninjaAdventureLicenseUrl from "../../assets/game/licenses/ninja-adventure-cc0-license.txt?url";
+
 export type SpriteSheetMetadata = {
   width: number;
   height: number;
@@ -28,7 +51,7 @@ export type GameAsset = {
 export const GAME_ASSETS = {
   tilesetFloor: {
     key: "tileset-floor",
-    path: "/assets/game/tiles/tileset-floor.png",
+    path: tilesetFloorUrl,
     sourcePath:
       "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png",
     kind: "tileset",
@@ -43,7 +66,7 @@ export const GAME_ASSETS = {
   },
   tilesetNature: {
     key: "tileset-nature",
-    path: "/assets/game/tiles/tileset-nature.png",
+    path: tilesetNatureUrl,
     sourcePath:
       "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetNature.png",
     kind: "tileset",
@@ -58,7 +81,7 @@ export const GAME_ASSETS = {
   },
   tilesetWater: {
     key: "tileset-water",
-    path: "/assets/game/tiles/tileset-water.png",
+    path: tilesetWaterUrl,
     sourcePath:
       "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetWater.png",
     kind: "tileset",
@@ -71,54 +94,82 @@ export const GAME_ASSETS = {
       rows: 17
     }
   },
-  tilesetVillageAbandoned: {
-    key: "tileset-village-abandoned",
-    path: "/assets/game/tiles/tileset-village-abandoned.png",
-    sourcePath:
-      "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetVillageAbandoned.png",
-    kind: "tileset",
-    metadata: {
-      width: 320,
-      height: 192,
-      frameWidth: 16,
-      frameHeight: 16,
-      columns: 20,
-      rows: 12
-    }
-  },
   learnerIdle: {
     key: "learner-idle",
-    path: "/assets/game/characters/learner/villager-idle.png",
-    sourcePath:
-      "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Actor/Character/Villager/SeparateAnim/Idle.png",
+    path: learnerIdleUrl,
+    sourcePath: "User-supplied d4c6a1ba-d0ca-4d2a-a1ac-a817cb123472.png",
     kind: "character",
     metadata: {
-      width: 64,
-      height: 16,
-      frameWidth: 16,
-      frameHeight: 16,
-      columns: 4,
-      rows: 1
-    }
-  },
-  learnerWalk: {
-    key: "learner-walk",
-    path: "/assets/game/characters/learner/villager-walk.png",
-    sourcePath:
-      "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Actor/Character/Villager/SeparateAnim/Walk.png",
-    kind: "character",
-    metadata: {
-      width: 64,
-      height: 64,
-      frameWidth: 16,
-      frameHeight: 16,
+      width: 1024,
+      height: 1024,
+      frameWidth: 256,
+      frameHeight: 256,
       columns: 4,
       rows: 4
     }
   },
+  learnerWalk: {
+    key: "learner-walk",
+    path: learnerWalkUrl,
+    sourcePath: "User-supplied d4c6a1ba-d0ca-4d2a-a1ac-a817cb123472.png",
+    kind: "character",
+    metadata: {
+      width: 1024,
+      height: 1024,
+      frameWidth: 256,
+      frameHeight: 256,
+      columns: 4,
+      rows: 4
+    }
+  },
+  blueHairExplorer: {
+    key: "blue-hair-explorer",
+    path: blueHairExplorerUrl,
+      sourcePath: "User-supplied 87ca4464-12c5-42d6-8d94-f4838e388112.png, rebuilt and baseline-normalized as a chroma-keyed 4x4 exploration sheet",
+    kind: "character",
+    metadata: {
+      width: 1248,
+      height: 1248,
+      frameWidth: 312,
+        frameHeight: 312,
+        columns: 4,
+        rows: 4
+    }
+  },
+  ambientMissYuuri: {
+    key: "ambient-miss-yuuri",
+    path: ambientMissYuuriUrl,
+    sourcePath:
+      "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Actor/Character/Princess/SeparateAnim/Walk.png",
+    kind: "character",
+    metadata: walkSheetMetadata()
+  },
+  ambientMangPanda: {
+    key: "ambient-mang-panda",
+    path: ambientMangPandaUrl,
+    sourcePath:
+      "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Actor/Character/OldMan3/SeparateAnim/Walk.png",
+    kind: "character",
+    metadata: walkSheetMetadata()
+  },
+  ambientMrKikushibu: {
+    key: "ambient-mr-kikushibu",
+    path: ambientMrKikushibuUrl,
+    sourcePath:
+      "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Actor/Character/Inspector/SeparateAnim/Walk.png",
+    kind: "character",
+    metadata: walkSheetMetadata()
+  },
+  riverBoat: {
+    key: "river-boat",
+    path: riverBoatUrl,
+    sourcePath:
+      "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Vehicles/Boat.png",
+    kind: "prop"
+  },
   npcMissEstelle: {
     key: "npc-miss-estelle",
-    path: "/assets/game/characters/npcs/miss-estelle-idle.png",
+    path: npcMissEstelleUrl,
     sourcePath:
       "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Actor/Character/Woman/SeparateAnim/Idle.png",
     kind: "character",
@@ -126,7 +177,7 @@ export const GAME_ASSETS = {
   },
   npcLoloAmbo: {
     key: "npc-lolo-ambo",
-    path: "/assets/game/characters/npcs/lolo-ambo-idle.png",
+    path: npcLoloAmboUrl,
     sourcePath:
       "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Actor/Character/OldMan/SeparateAnim/Idle.png",
     kind: "character",
@@ -134,7 +185,7 @@ export const GAME_ASSETS = {
   },
   npcMarketVendor: {
     key: "npc-market-vendor",
-    path: "/assets/game/characters/npcs/market-vendor-idle.png",
+    path: npcMarketVendorUrl,
     sourcePath:
       "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Actor/Character/OldMan2/SeparateAnim/Idle.png",
     kind: "character",
@@ -142,7 +193,7 @@ export const GAME_ASSETS = {
   },
   npcBridgeKeeper: {
     key: "npc-bridge-keeper",
-    path: "/assets/game/characters/npcs/bridge-keeper-idle.png",
+    path: npcBridgeKeeperUrl,
     sourcePath:
       "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Actor/Character/Master/SeparateAnim/Idle.png",
     kind: "character",
@@ -150,13 +201,13 @@ export const GAME_ASSETS = {
   },
   mapFragment: {
     key: "map-fragment",
-    path: "/assets/game/items/map-fragment.png",
+    path: mapFragmentUrl,
     sourcePath: "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Items/Scroll/Scroll.png",
     kind: "item"
   },
   villageRedHouse: {
     key: "village-red-house",
-    path: "/assets/game/tiles/tileset-house.png",
+    path: tilesetHouseUrl,
     sourcePath:
       "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetHouse.png crop 0,0 64x48",
     kind: "prop",
@@ -164,7 +215,7 @@ export const GAME_ASSETS = {
   },
   villageLearningHall: {
     key: "village-learning-hall",
-    path: "/assets/game/tiles/tileset-house.png",
+    path: tilesetHouseUrl,
     sourcePath:
       "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetHouse.png crop 192,0 64x48",
     kind: "prop",
@@ -172,51 +223,57 @@ export const GAME_ASSETS = {
   },
   villageEastHouse: {
     key: "village-east-house",
-    path: "/assets/game/tiles/tileset-house.png",
+    path: tilesetHouseUrl,
     sourcePath:
       "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetHouse.png crop 128,0 64x48",
     kind: "prop",
     region: houseRegion(128, 0)
   },
-  villageMarketCounter: {
-    key: "village-market-counter",
-    path: "/assets/game/tiles/tileset-house.png",
+  villageMarketShop: {
+    key: "village-market-shop",
+    path: tilesetHouseUrl,
     sourcePath:
-      "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetHouse.png crop 256,0 64x48",
+      "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetHouse.png crop 64,0 64x48",
     kind: "prop",
-    region: houseRegion(256, 0)
+    region: houseRegion(64, 0)
   },
   treeRound: {
     key: "tree-round",
-    path: "/assets/game/props/tree-round.png",
+    path: treeRoundUrl,
     sourcePath:
       "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetNature.png crop 0,0 32x32",
     kind: "prop"
   },
   treeWide: {
     key: "tree-wide",
-    path: "/assets/game/props/tree-wide.png",
+    path: treeWideUrl,
     sourcePath:
       "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetNature.png crop 0,48 64x32",
     kind: "prop"
   },
   stumpOrange: {
     key: "stump-orange",
-    path: "/assets/game/props/stump-orange.png",
+    path: stumpOrangeUrl,
     sourcePath:
       "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetNature.png crop 32,144 32x16",
     kind: "prop"
   },
   rockSmall: {
     key: "rock-small",
-    path: "/assets/game/props/rock-small.png",
+    path: rockSmallUrl,
     sourcePath:
       "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetNature.png crop 160,192 32x16",
     kind: "prop"
   },
+  readingShrine: {
+    key: "reading-shrine",
+    path: readingShrineUrl,
+    sourcePath: "Generated ReaDirect reading shrine asset from the east-riverbank game reference",
+    kind: "prop"
+  },
   ninjaAdventureLicense: {
     key: "ninja-adventure-cc0-license",
-    path: "/assets/game/licenses/ninja-adventure-cc0-license.txt",
+    path: ninjaAdventureLicenseUrl,
     sourcePath: "Ninja Adventure - Asset Pack/Ninja Adventure - Asset Pack/LICENSE.txt",
     kind: "license"
   }
@@ -228,9 +285,13 @@ export const REQUIRED_ASSET_KEYS = [
   "tilesetFloor",
   "tilesetNature",
   "tilesetWater",
-  "tilesetVillageAbandoned",
   "learnerIdle",
   "learnerWalk",
+  "blueHairExplorer",
+  "ambientMissYuuri",
+  "ambientMangPanda",
+  "ambientMrKikushibu",
+  "riverBoat",
   "npcMissEstelle",
   "npcLoloAmbo",
   "npcMarketVendor",
@@ -239,11 +300,12 @@ export const REQUIRED_ASSET_KEYS = [
   "villageRedHouse",
   "villageLearningHall",
   "villageEastHouse",
-  "villageMarketCounter",
+  "villageMarketShop",
   "treeRound",
   "treeWide",
   "stumpOrange",
   "rockSmall",
+  "readingShrine",
   "ninjaAdventureLicense"
 ] as const satisfies readonly GameAssetKey[];
 
@@ -272,6 +334,17 @@ function idleSheetMetadata(): SpriteSheetMetadata {
     frameHeight: 16,
     columns: 4,
     rows: 1
+  };
+}
+
+function walkSheetMetadata(): SpriteSheetMetadata {
+  return {
+    width: 64,
+    height: 64,
+    frameWidth: 16,
+    frameHeight: 16,
+    columns: 4,
+    rows: 4
   };
 }
 
