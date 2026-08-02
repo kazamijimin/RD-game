@@ -5,6 +5,9 @@ import tilesetHouseUrl from "../../assets/game/tiles/tileset-house.png";
 import learnerIdleUrl from "../../assets/game/characters/learner/yato-walk.png";
 import learnerWalkUrl from "../../assets/game/characters/learner/yato-walk.png";
 import blueHairExplorerUrl from "../../assets/game/characters/learner/blue-hair-explorer-v2.png";
+import irumaUrl from "../../assets/game/characters/learner/iruma-walk.png";
+import luffyUrl from "../../assets/game/characters/learner/luffy-walk.png";
+import frierenUrl from "../../assets/game/characters/learner/frieren-walk.png";
 import ambientMissYuuriUrl from "../../assets/game/characters/ambient/miss-yuuri-walk.png";
 import ambientMangPandaUrl from "../../assets/game/characters/ambient/mang-panda-walk.png";
 import ambientMrKikushibuUrl from "../../assets/game/characters/ambient/mr-kikushibu-walk.png";
@@ -134,6 +137,48 @@ export const GAME_ASSETS = {
         frameHeight: 312,
         columns: 4,
         rows: 4
+    }
+  },
+  iruma: {
+    key: "iruma",
+    path: irumaUrl,
+    sourcePath: "User-supplied iruma-walk.png — Iruma Suzuki (Mairimashita! Iruma-kun) pixel chibi walk sheet, transparent background, 4 columns × 4 rows",
+    kind: "character",
+    metadata: {
+      width: 600,
+      height: 600,
+      frameWidth: 150,
+      frameHeight: 150,
+      columns: 4,
+      rows: 4
+    }
+  },
+  luffy: {
+    key: "luffy",
+    path: luffyUrl,
+    sourcePath: "User-supplied luffy-walk.png",
+    kind: "character",
+    metadata: {
+      width: 1024,
+      height: 1024,
+      frameWidth: 256,
+      frameHeight: 256,
+      columns: 4,
+      rows: 4
+    }
+  },
+  frieren: {
+    key: "frieren",
+    path: frierenUrl,
+    sourcePath: "User-supplied frieren-walk.png — Frieren (Sōsou no Frieren) pixel chibi walk sheet, transparent background, 4 columns × 3-4 rows (down, up, right)",
+    kind: "character",
+    metadata: {
+      width: 600,
+      height: 600,
+      frameWidth: 150,
+      frameHeight: 150,
+      columns: 4,
+      rows: 4
     }
   },
   ambientMissYuuri: {
@@ -288,6 +333,9 @@ export const REQUIRED_ASSET_KEYS = [
   "learnerIdle",
   "learnerWalk",
   "blueHairExplorer",
+  "iruma",
+  "luffy",
+  "frieren",
   "ambientMissYuuri",
   "ambientMangPanda",
   "ambientMrKikushibu",

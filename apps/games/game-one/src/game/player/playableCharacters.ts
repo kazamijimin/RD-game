@@ -4,8 +4,8 @@ import type { Facing, SpriteFacingLayout } from "./playerMovement";
 
 export const PLAYABLE_CHARACTER_PREFERENCE_KEY = "readirect-rpg:playable-character:v1";
 
-export type PlayableCharacterId = "yato" | "blue-hair-explorer";
-export type PlayableCharacterAssetKey = "learnerWalk" | "blueHairExplorer";
+export type PlayableCharacterId = "yato" | "blue-hair-explorer" | "iruma" | "frieren";
+export type PlayableCharacterAssetKey = "learnerWalk" | "blueHairExplorer" | "iruma" | "frieren";
 
 export type PlayableCharacter = {
   id: PlayableCharacterId;
@@ -38,6 +38,36 @@ export const PLAYABLE_CHARACTERS: readonly PlayableCharacter[] = [
     assetKey: "blueHairExplorer",
     spriteLayout: "row-walk-four-way",
     spriteScale: 0.15,
+    spriteOffsetY: 0,
+    boatSpriteOffsetY: 0,
+    spriteFacingOffsetY: {}
+  },
+  {
+    id: "iruma",
+    name: { en: "Iruma Suzuki", fil: "Iruma Suzuki" },
+    assetKey: "iruma",
+    spriteLayout: "yato-mirror-left",
+    spriteScale: 0.35,
+    spriteOffsetY: 0,
+    boatSpriteOffsetY: 0,
+    spriteFacingOffsetY: {}
+  },
+  {
+    id: "luffy",
+    name: { en: "Monkey D. Luffy", fil: "Monkey D. Luffy" },
+    assetKey: "luffy",
+    spriteLayout: "yato-mirror-left",
+    spriteScale: 0.21, // scale down from 256px to fit game tiles
+    spriteOffsetY: 0,
+    boatSpriteOffsetY: 0,
+    spriteFacingOffsetY: {}
+  },
+  {
+    id: "frieren",
+    name: { en: "Frieren", fil: "Frieren" },
+    assetKey: "frieren",
+    spriteLayout: "row-three-dir",
+    spriteScale: 0.29,
     spriteOffsetY: 0,
     boatSpriteOffsetY: 0,
     spriteFacingOffsetY: {}

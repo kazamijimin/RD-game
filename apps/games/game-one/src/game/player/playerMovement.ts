@@ -60,15 +60,19 @@ export function getFacingFromInput(input: Point, previousFacing: Facing): Facing
 }
 
 export type Facing = "up" | "down" | "left" | "right";
-export type SpriteFacingLayout = "standard" | "yato" | "row-walk" | "row-walk-four-way";
+export type SpriteFacingLayout = "standard" | "yato" | "yato-mirror-left" | "row-walk" | "row-walk-four-way" | "row-three-dir";
 
 export function getBaseFrameForFacing(facing: Facing, layout: SpriteFacingLayout = "standard") {
   const frames = layout === "yato"
     ? { down: 0, up: 1, left: 3, right: 2 }
+    : layout === "yato-mirror-left"
+      ? { down: 0, up: 1, left: 2, right: 2 }  // left reuses right column; sprite is flipped in getSpriteFlipXForFacing
     : layout === "row-walk"
       ? { down: 0, up: 8, left: 4, right: 4 }
       : layout === "row-walk-four-way"
         ? { down: 0, up: 8, left: 12, right: 4 }
+      : layout === "row-three-dir"
+        ? { down: 0, up: 4, left: 8, right: 8 }  // 3 direction rows: down, up, right; left mirrors right
       : { down: 0, up: 1, left: 2, right: 3 };
 
   return frames[facing];
@@ -80,9 +84,18 @@ export function getWalkFrameForFacing(
   layout: SpriteFacingLayout = "standard"
 ) {
   const clampedStep = Math.max(0, Math.floor(animationStep)) % 4;
-  if (layout === "row-walk" || layout === "row-walk-four-way") {
+  if (layout === "row-walk" || layout === "row-walk-four-way" || layout === "row-three-dir") {
+    // Row-based layouts: walk steps are consecutive within each direction row.
     return getBaseFrameForFacing(facing, layout) + clampedStep;
   }
+  if (layout === "yato-mirror-left") {
+    // Skip the idle row (row 0) and ping-pong through walk rows 1→2→3→2.
+    // This ensures the walk cycle is symmetric: step1, mid, step3, mid, repeat.
+    // Both legs appear to alternate rather than the same leg always leading.
+    const rowOffset = [4, 8, 12, 8][clampedStep];
+    return getBaseFrameForFacing(facing, layout) + rowOffset;
+  }
+  // yato, standard: animation steps go down the column
   return getBaseFrameForFacing(facing, layout) + clampedStep * 4;
 }
 
@@ -114,7 +127,9 @@ export function getSwimmingStrokeAngle(
 }
 
 export function getSpriteFlipXForFacing(facing: Facing, layout: SpriteFacingLayout = "standard") {
-  return layout === "row-walk" && facing === "left";
+  // row-walk, row-three-dir, and yato-mirror-left have no dedicated left frames
+  // — they reuse right-facing frames and mirror horizontally.
+  return (layout === "row-walk" || layout === "row-three-dir" || layout === "yato-mirror-left") && facing === "left";
 }
 
 export function getBoatRidingFrame(
