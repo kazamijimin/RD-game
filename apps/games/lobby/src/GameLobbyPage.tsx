@@ -11,15 +11,22 @@ interface LobbyLocationState {
 const gameSlots = [
   {
     key: "game-one",
-    title: "Game One",
-    description: "Contributor game slot one",
+    title: "Chronicles of the Lost Kingdom",
+    description: "Explore the village, read clues, and help its people.",
     route: "/learner/games/game-one",
+    buttonLabel: "Play Game One",
+    thumbnail: "/images/game-one-thumbnail.png",
+    thumbnailAlt:
+      "A learner follows glowing guide dots through a pixel-art riverside village",
   },
   {
     key: "game-two",
     title: "Game Two",
     description: "Contributor game slot two",
     route: "/learner/games/game-two",
+    buttonLabel: "Open Game Two",
+    thumbnail: null,
+    thumbnailAlt: null,
   },
 ] as const;
 
@@ -141,6 +148,28 @@ export function GameLobbyPage() {
               <div className="game-lobby__game-grid">
                 {gameSlots.map((game, index) => (
                   <article className="game-lobby__game-card" key={game.key}>
+                    {game.thumbnail ? (
+                      <button
+                        className="game-lobby__game-preview"
+                        type="button"
+                        aria-label={`Play ${game.title}`}
+                        title={`Play ${game.title}`}
+                        onClick={() => navigate(game.route)}
+                      >
+                        <img
+                          src={game.thumbnail}
+                          alt={game.thumbnailAlt ?? ""}
+                          loading="eager"
+                          decoding="async"
+                        />
+                        <span
+                          className="game-lobby__preview-play"
+                          aria-hidden="true"
+                        >
+                          &#9654;
+                        </span>
+                      </button>
+                    ) : null}
                     <span
                       className="game-lobby__game-number"
                       aria-hidden="true"
@@ -154,7 +183,7 @@ export function GameLobbyPage() {
                       type="button"
                       onClick={() => navigate(game.route)}
                     >
-                      Open {game.title}
+                      {game.buttonLabel}
                     </button>
                   </article>
                 ))}

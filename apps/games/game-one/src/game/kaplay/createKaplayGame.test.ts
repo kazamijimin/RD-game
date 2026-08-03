@@ -4,6 +4,7 @@ import { NPCS } from "../content/npcs";
 import { MAP_LANDMARKS } from "../map/prototypeMap";
 import {
   createKaplayGame,
+  getLogicalCanvasSize,
   getInteractionPromptPosition,
   getRenderPixelDensity,
   isWorldBoundsVisible,
@@ -76,7 +77,8 @@ describe("createKaplayGame", () => {
         width: 1280,
         height: 720,
         global: false,
-        letterbox: true,
+        stretch: true,
+        letterbox: false,
         crisp: true,
         pixelDensity: 1,
         texFilter: "nearest"
@@ -209,10 +211,23 @@ describe("createKaplayGame", () => {
     }
   );
 
-  it("caps the desktop render buffer while keeping mobile at native density", () => {
+  it.each([
+    { width: 1920, height: 800 },
+    { width: 844, height: 390 },
+    { width: 1024, height: 768 }
+  ])("matches the logical canvas to a $width x $height host without letterbox bars", ({ width, height }) => {
+    const container = document.createElement("div");
+    setContainerSize(container, width, height);
+
+    const logical = getLogicalCanvasSize(container);
+
+    expect(logical.width / logical.height).toBeCloseTo(width / height, 3);
+  });
+
+  it("keeps standard desktop rendering sharp while capping very large buffers", () => {
     const container = document.createElement("div");
     setContainerSize(container, 1920, 1080);
-    expect(getRenderPixelDensity(container)).toBeCloseTo(0.5, 2);
+    expect(getRenderPixelDensity(container)).toBeCloseTo(0.83, 2);
 
     setContainerSize(container, 844, 390);
     expect(getRenderPixelDensity(container)).toBe(1);

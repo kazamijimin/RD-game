@@ -34,8 +34,8 @@ body:has(.game-route),
 
 .game-route__stage {
   container: game-stage / size;
-  width: min(100vw, calc(100dvh * 16 / 9));
-  height: min(100dvh, calc(100vw * 9 / 16));
+  width: 100%;
+  height: 100%;
   max-width: 100%;
   max-height: 100%;
   flex: none;
@@ -70,6 +70,15 @@ body:has(.game-route),
     max(var(--hud-edge-gap), var(--safe-left));
   background: linear-gradient(to bottom, rgb(8 21 16 / 92%), rgb(8 21 16 / 42%), transparent);
   pointer-events: none;
+}
+
+.game-topbar--controls-only {
+  grid-template-columns: 1fr;
+}
+
+.game-topbar--controls-only .game-system-controls {
+  grid-column: 1;
+  justify-self: end;
 }
 
 .game-brand {
@@ -138,6 +147,106 @@ body:has(.game-route),
   cursor: not-allowed;
   filter: grayscale(0.75);
   opacity: 0.58;
+}
+
+/* Compact command bar: each control has a recognizable token before its label. */
+.game-system-controls {
+  align-items: stretch;
+  gap: clamp(0.35rem, 0.75vw, 0.7rem);
+}
+
+.game-system-button,
+.game-character-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.3rem, 0.55vw, 0.5rem);
+  min-height: clamp(3rem, 5vmin, 3.5rem);
+  border: 2px solid #fff7db;
+  border-radius: 0.4rem;
+  background: linear-gradient(180deg, rgb(23 65 47 / 96%), rgb(8 27 19 / 96%));
+  box-shadow: 0 4px 0 #071712, inset 0 0 0 2px rgb(108 176 132 / 28%);
+  font-size: clamp(0.78rem, 1.65vmin, 1rem);
+  letter-spacing: 0;
+  text-shadow: 1px 1px 0 #071712;
+}
+
+.game-character-button {
+  padding-inline: clamp(0.65rem, 1vw, 0.95rem);
+}
+
+.game-character-button::before {
+  display: none;
+}
+
+.game-command-icon {
+  display: inline-grid;
+  width: 1.35rem;
+  height: 1.35rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid #fff7db;
+  border-radius: 50%;
+  background: #0c3425;
+  color: #ffdf63;
+  font-size: 0.56rem;
+  font-weight: 950;
+  line-height: 1;
+  text-shadow: none;
+}
+
+.game-command-icon--character {
+  width: 0.8rem;
+  height: 0.8rem;
+  border: 2px solid #fff7db;
+  background: #22a370;
+  box-shadow: 0 0 0 2px #0a2117;
+}
+
+.game-command-icon--language {
+  font-size: 0.68rem;
+}
+
+.game-command-icon--sound {
+  width: 1.65rem;
+  border-radius: 0.2rem;
+  font-size: 0.5rem;
+}
+
+.game-command-icon--pause {
+  border-radius: 0.2rem;
+  font-size: 0.75rem;
+}
+
+.game-command-icon--exit {
+  color: #ffd66e;
+  font-size: 0.75rem;
+}
+
+.game-system-button--primary {
+  border-color: #facc15;
+  background: linear-gradient(180deg, #fffdf2, #f1e7ba);
+  box-shadow: 0 4px 0 #9b7514, inset 0 0 0 2px #fff;
+  color: #13251d;
+  text-shadow: none;
+}
+
+.game-system-button--primary .game-command-icon {
+  border-color: #9b7514;
+  background: #facc15;
+  color: #13251d;
+}
+
+.game-system-button:hover:not(:disabled),
+.game-character-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.game-system-button:focus-visible,
+.game-character-button:focus-visible {
+  outline: 3px solid #facc15;
+  outline-offset: 3px;
 }
 
 .navigation-hud {
@@ -298,6 +407,124 @@ body:has(.game-route),
   color: #dcefe5;
   font-size: clamp(0.95rem, 2.5vmin, 1.15rem);
   line-height: 1.45;
+}
+
+/* Pause is a deliberate menu, not a row of controls floating above the world. */
+.game-status-overlay--pause {
+  background: rgb(4 15 10 / 74%);
+  backdrop-filter: blur(2px);
+}
+
+.game-status-panel--pause {
+  width: min(31rem, 100%);
+  max-height: calc(100dvh - 2rem);
+  border: 4px solid #facc15;
+  border-radius: 0.55rem;
+  background: #fff8df;
+  padding: clamp(1rem, 3vmin, 1.45rem);
+  color: #13251d;
+  box-shadow: 0 6px 0 #176b4d, 0 12px 0 #071712, 0 20px 42px rgb(0 0 0 / 46%);
+}
+
+.game-status-panel__eyebrow {
+  margin: 0;
+  color: #176b4d;
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.04em;
+}
+
+.game-status-panel--pause h2 {
+  margin-top: 0.3rem;
+  color: #13251d;
+  font-size: clamp(2rem, 6vmin, 2.8rem);
+  font-weight: 950;
+  letter-spacing: 0;
+}
+
+.game-status-panel--pause > p:not(.game-status-panel__eyebrow) {
+  max-width: 25rem;
+  margin: 0.55rem auto 0;
+  color: #315343;
+  font-size: clamp(1rem, 2.7vmin, 1.15rem);
+}
+
+.pause-panel__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-top: 1.2rem;
+}
+
+.pause-panel__actions button {
+  min-height: 3rem;
+  border: 3px solid #176b4d;
+  border-radius: 0.35rem;
+  padding: 0.5rem 0.7rem;
+  color: #13251d;
+  font-size: clamp(0.9rem, 2.2vmin, 1.05rem);
+  font-weight: 900;
+  line-height: 1.1;
+  box-shadow: 0 3px 0 #0b4934;
+}
+
+.pause-panel__resume {
+  grid-column: 1 / -1;
+  border-color: #9b7514 !important;
+  background: #facc15;
+  box-shadow: 0 3px 0 #9b7514 !important;
+}
+
+.pause-panel__resume:disabled {
+  cursor: not-allowed;
+  background: #b7bd9a;
+  color: #586359;
+  filter: grayscale(0.55);
+}
+
+.pause-panel__utility {
+  background: #e9f3df;
+}
+
+.pause-panel__exit {
+  grid-column: 1 / -1;
+  background: #fff;
+}
+
+.pause-panel__actions button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+}
+
+.pause-panel__actions button:focus-visible {
+  outline: 4px solid #3b82f6;
+  outline-offset: 3px;
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .game-status-panel--pause {
+    width: min(34rem, 100%);
+    padding: 0.85rem;
+  }
+
+  .game-status-panel--pause h2 {
+    font-size: 1.8rem;
+  }
+
+  .pause-panel__actions {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: 0.8rem;
+  }
+
+  .pause-panel__resume,
+  .pause-panel__exit {
+    grid-column: auto;
+  }
+
+  .pause-panel__actions button {
+    min-height: 2.65rem;
+    font-size: 0.78rem;
+  }
 }
 
 .mission-overlay,
@@ -931,6 +1158,121 @@ body:has(.game-route),
     min-width: 2.75rem;
     min-height: 2.75rem;
     padding-inline: 0.25rem;
+  }
+}
+
+/* Keep the map stack in the upper-left corner when the in-game title is hidden. */
+.game-topbar--controls-only + .game-route__canvas-layer,
+.game-topbar--controls-only ~ .game-route__canvas-layer {
+  min-width: 0;
+}
+
+.navigation-hud {
+  top: max(0.75rem, var(--safe-top));
+  left: max(0.5rem, var(--safe-left));
+  display: flex;
+  width: min(13rem, calc(100vw - 1rem));
+  max-width: calc(100% - 1rem);
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navigation-hud .minimap-shell {
+  position: relative;
+  inset: auto;
+  width: clamp(9rem, 18vmin, 10.5rem);
+  height: clamp(9rem, 18vmin, 10.5rem);
+  margin: 0;
+}
+
+.navigation-hud .navigation-mission-panel {
+  width: 100%;
+  max-height: none;
+  overflow: visible;
+}
+
+@media (max-width: 520px) {
+  .game-system-controls {
+    gap: 0.25rem;
+  }
+
+  .game-system-button,
+  .game-character-button {
+    gap: 0.25rem;
+    min-height: 2.7rem;
+    padding-inline: 0.45rem;
+  }
+
+  .game-command-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    font-size: 0.5rem;
+  }
+
+  .game-command-icon--sound {
+    width: 1.35rem;
+    font-size: 0.42rem;
+  }
+
+  .navigation-hud {
+    top: max(0.5rem, var(--safe-top));
+    width: min(10rem, calc(100vw - 1rem));
+  }
+
+  .navigation-hud .minimap-shell {
+    width: 7.5rem;
+    height: 7.5rem;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .navigation-hud {
+    top: max(0.35rem, var(--safe-top));
+    width: min(10rem, calc(100vw - 1rem));
+  }
+
+  .navigation-hud .minimap-shell {
+    width: 6.75rem;
+    height: 6.75rem;
+  }
+}
+
+/* Compact screens need a clear lane between the mission card and the movement dock. */
+@media (max-width: 700px) {
+  .navigation-hud {
+    width: min(19rem, calc(100vw - 1rem));
+    max-height: calc(100dvh - 9rem);
+  }
+
+  .navigation-hud .navigation-mission-panel {
+    max-height: min(11rem, calc(100dvh - 12rem));
+    overflow: auto;
+  }
+
+  .navigation-hud .navigation-objective {
+    font-size: 1rem;
+    line-height: 1.35;
+  }
+
+  .navigation-hud .navigation-mission-progress {
+    padding-right: 3.35rem;
+  }
+
+  .movement-control-settings-button {
+    right: auto;
+    bottom: 0;
+    left: -3.5rem;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) and (max-width: 900px) {
+  .navigation-hud {
+    width: min(18rem, calc(100vw - 1rem));
+  }
+
+  .navigation-hud .navigation-mission-panel {
+    max-height: calc(100dvh - 9rem);
   }
 }
 

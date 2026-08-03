@@ -47,7 +47,6 @@ export function loadMissionProgress(
       incorrectSubmissionsByQuestion: stored.state.incorrectSubmissionsByQuestion ?? {},
       readingHeartsRemaining: loadReadingHearts(stored.state),
       recoveredQuestionIds: stored.state.recoveredQuestionIds ?? [],
-      passageRereadCount: Number.isInteger(stored.state.passageRereadCount) ? stored.state.passageRereadCount : 0,
       comprehensionRestartCount: Number.isInteger(stored.state.comprehensionRestartCount)
         ? Math.max(0, stored.state.comprehensionRestartCount)
         : 0,
@@ -61,6 +60,8 @@ export function loadMissionProgress(
 }
 
 function restoreSafeStage(state: MissionState): MissionState["stage"] {
+  const legacy = state as unknown as Omit<MissionState, "stage"> & { stage: string; reviewReturnStage?: MissionState["stage"] };
+  if (legacy.stage === "storyReview") return legacy.reviewReturnStage ?? "missionAction";
   if (state.stage === "deferredResume" || state.stage === "questionsRemaining") return "missionInProgress";
   if (state.stage === "deferredConfirmation") return "questionRound";
   return state.stage;

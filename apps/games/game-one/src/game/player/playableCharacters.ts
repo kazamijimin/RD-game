@@ -4,8 +4,8 @@ import type { Facing, SpriteFacingLayout } from "./playerMovement";
 
 export const PLAYABLE_CHARACTER_PREFERENCE_KEY = "readirect-rpg:playable-character:v1";
 
-export type PlayableCharacterId = "yato" | "blue-hair-explorer" | "iruma" | "frieren";
-export type PlayableCharacterAssetKey = "learnerWalk" | "blueHairExplorer" | "iruma" | "frieren";
+export type PlayableCharacterId = "yato" | "blue-hair-explorer" | "iruma" | "luffy" | "frieren";
+export type PlayableCharacterAssetKey = "learnerWalk" | "blueHairExplorer" | "iruma" | "luffy" | "frieren";
 
 export type PlayableCharacter = {
   id: PlayableCharacterId;

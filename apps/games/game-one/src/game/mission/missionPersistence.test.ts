@@ -45,9 +45,21 @@ describe("local mission progress", () => {
     delete legacyState.readingHeartsRemaining;
     delete legacyState.incorrectSubmissionsByQuestion;
     delete legacyState.recoveredQuestionIds;
-    delete legacyState.passageRereadCount;
     localStorage.setItem("readirect-rpg:mission-progress:v1", JSON.stringify({ version: 1, state: legacyState }));
     expect(loadMissionProgress(rounds)?.readingPageIndex).toBe(0);
     expect(loadMissionProgress(rounds)?.readingHeartsRemaining).toBe(3);
+  });
+
+  it("moves old story review saves into the comprehension flow", () => {
+    const rounds = createMissionRounds(MISSIONS, createSeededRandom(12));
+    const legacyState = {
+      ...createInitialMissionState(rounds),
+      stage: "storyReview",
+      reviewReturnStage: "questionRound",
+      readingPresented: true,
+      actionStatus: "correct"
+    };
+    localStorage.setItem("readirect-rpg:mission-progress:v1", JSON.stringify({ version: 1, state: legacyState }));
+    expect(loadMissionProgress(rounds)?.stage).toBe("questionRound");
   });
 });

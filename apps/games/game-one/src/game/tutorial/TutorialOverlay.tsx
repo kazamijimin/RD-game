@@ -64,7 +64,7 @@ export function TutorialOverlay({
   const narratorStyle = placeAtSide && placementBoundary && sidePlacement
     ? sideNarratorStyle(placementBoundary, sidePlacement)
     : undefined;
-  const readingStep = ["reading", "readAgain", "choice", "answerLater"].includes(state.step);
+  const readingStep = ["reading", "choice", "answerLater"].includes(state.step);
 
   return (
     <div className="tutorial-layer" aria-label={copy.guidedTutorial}>
